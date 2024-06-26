@@ -27,12 +27,13 @@
 
 // ----------------------------------------------------------------------------------//
 // eslint-disable-next-line no-unused-vars
-import React from "react";
+import React, { useState } from "react";
 import { Button, Typography } from "@mui/material";
 
 export default function Test2Screen() {
   var color = "LEMONCHIFFON";
   var color2 = "CORAL";
+  const [ toggleColor, setToggleColor ] = useState(color)
 
   return (
     <div className="testContainer">
@@ -40,12 +41,12 @@ export default function Test2Screen() {
         <Typography
           variant="h2"
           component={"h2"}
-          sx={{ p: 3, backgroundColor: color }}
+          sx={{ p: 3, backgroundColor: toggleColor }}
         >
           Lemonchiffon
         </Typography>
 
-        <Button variant="contained" onClick={() => (color = "coral")} sx={{width: '50%'}}>
+        <Button variant="contained" onClick={() => (setToggleColor(value => value === color ? color2 : color ))} sx={{width: '50%'}}>
           Toggle
         </Button>
       </div>

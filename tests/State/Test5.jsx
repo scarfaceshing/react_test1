@@ -30,10 +30,18 @@ import React from "react";
 import Loader from "../../src/components/Loader";
 import { useState, useEffect } from "react";
 
+const Loading = ({show}) => <div>{show ? <h1>Loading...</h1> : <></>}</div>
+
 //default component.
 export default function Test5Screen() {
+  const [visible, setVisible] = useState(false)
+ 
   function mockRequest() {
-    setTimeout(() => {}, 1500);
+    setVisible(true)
+
+    setTimeout(() => {
+      setVisible(false)
+    }, 1500);
   }
   return (
     <div className="testContainer">
@@ -49,6 +57,7 @@ export default function Test5Screen() {
         >
           Send Request
         </button>
+        <Loading show={visible} />
       </div>
     </div>
   );

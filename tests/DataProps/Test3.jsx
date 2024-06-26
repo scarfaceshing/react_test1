@@ -20,7 +20,7 @@
 
 // ----------------------------------------------------------------------------------//
 // eslint-disable-next-line no-unused-vars
-import React from "react";
+import React, { useEffect } from "react";
 
 export default function Test3Screen() {
   const people = {
@@ -36,7 +36,9 @@ export default function Test3Screen() {
 
         <span> Details: </span>
         <ul>
-          <li> Name: {people.name} </li>
+          {Object.entries(people).map(([key, name], index) => (
+            <li key={index}>{key}: {name}</li>
+          ))}
         </ul>
       </div>
     </div>

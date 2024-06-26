@@ -27,7 +27,7 @@
 
 /* eslint-disable react/prop-types */
 // eslint-disable-next-line no-unused-vars
-import React from "react";
+import React, { useEffect } from "react";
 import { useState, useContext, createContext } from "react";
 
 //This is your context variable.
@@ -36,20 +36,20 @@ const PersonContext = createContext();
 //This is your context provider component
 function Context({ children }) {
   const BaseContext = {
-    name: "",
+    name: "Jordan Ripley",
     age: "",
     height: "",
     complexion: "",
   };
+  
+  const [person, setPerson] = useState(BaseContext)
 
-  const person = BaseContext;
-
-  return <PersonContext.Provider value={{}}>{children}</PersonContext.Provider>;
+  return <PersonContext.Provider value={{person, setPerson}}>{children}</PersonContext.Provider>;
 }
 
 //set values here.
 function SetterComponent() {
-  const setPerson = () => undefined;
+  const {person, setPerson} = useContext(PersonContext);
 
   const newPerson = {
     name: "Jrue Holiday",
@@ -66,7 +66,7 @@ function SetterComponent() {
         height: 60,
         borderRadius: 2.725,
       }}
-      onClick={() => setPerson()}
+      onClick={() => setPerson(newPerson)}
     >
       Set
     </button>
@@ -75,13 +75,13 @@ function SetterComponent() {
 
 //access and display 'person' details here.
 function Screen() {
-  const person = "Jordan Ripley";
+  const {person, setPerson} = useContext(PersonContext);
 
   return (
     <div className="testContainer">
       <div className="stateComp">
         <h1> {person ? person.name : "No name found."} </h1>
-        <SetterComponent />
+          <SetterComponent />
       </div>
     </div>
   );
@@ -89,5 +89,9 @@ function Screen() {
 
 //default component.
 export default function Test4Screen() {
-  return <Screen />;
+  return (
+    <Context>
+      <Screen />
+    </Context>
+  );
 }
